@@ -67,26 +67,26 @@ const App = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section id="home" className="relative py-20 overflow-hidden">
+      <section id="home" className="relative py-12 md:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-pink-600/10 to-purple-600/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6">
+              <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
                   {currentSlide.title1}
                 </span>
                 <br />
                 <span className="text-gray-800">{currentSlide.title2}</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
                 {currentSlide.description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-pink-700 hover:to-purple-700 transform hover:scale-105 hover:shadow-2xl transition-all duration-300 shadow-xl focus:ring-4 focus:ring-pink-300 focus:outline-none">
+                <button className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold hover:from-pink-700 hover:to-purple-700 transform hover:scale-105 hover:shadow-2xl transition-all duration-300 shadow-xl focus:ring-4 focus:ring-pink-300 focus:outline-none text-sm md:text-base">
                   Shop Now
                 </button>
-                <button className="border-2 border-pink-600 text-pink-600 px-8 py-4 rounded-full font-semibold hover:bg-pink-600 hover:text-white hover:shadow-lg transition-all duration-300 focus:ring-4 focus:ring-pink-300 focus:outline-none">
+                <button className="border-2 border-pink-600 text-pink-600 px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold hover:bg-pink-600 hover:text-white hover:shadow-lg transition-all duration-300 focus:ring-4 focus:ring-pink-300 focus:outline-none text-sm md:text-base">
                   Learn More
                 </button>
               </div>
@@ -97,7 +97,7 @@ const App = () => {
                   key={currentSlide.image} // Force re-render for fade
                   src={currentSlide.image}
                   alt="Featured product showcase"
-                  className="rounded-3xl shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500 animate-fade-in"
+                  className="rounded-3xl shadow-2xl md:transform md:rotate-3 hover:rotate-0 transition-all duration-500 animate-fade-in w-full max-w-md mx-auto md:mx-0"
                 />
 
               </div>
@@ -115,7 +115,7 @@ const App = () => {
             <h2 className="text-3xl lg:text-4xl font-bold mb-3 text-gray-800">What We Offer</h2>
             <p className="text-gray-600">A glimpse of our bestsellers and essentials</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {products.slice(0, 3).map((item: Product) => (
               <div key={item.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                 <img src={item.image} alt={item.name} className="w-full h-56 object-contain bg-white" loading="lazy" />
@@ -141,16 +141,16 @@ const App = () => {
       <OurPartners />
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-gradient-to-r from-pink-600 to-purple-600">
+      <section id="contact" className="py-12 md:py-20 bg-gradient-to-r from-pink-600 to-purple-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4 text-white">
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white">
               Get in Touch
             </h2>
-            <p className="text-xl text-pink-100">We'd love to hear from you</p>
+            <p className="text-lg md:text-xl text-pink-100">We'd love to hear from you</p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             <div className="text-center">
               <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-8">
                 <Phone className="w-12 h-12 text-white mx-auto mb-4" />
