@@ -1,7 +1,30 @@
 import { Facebook, Twitter, Instagram } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSectionNavigation = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      // If not on home page, navigate to home first
+      navigate('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,10 +40,10 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#home" className="hover:text-pink-400 transition-colors">Home</a></li>
+              <li><button onClick={() => handleSectionNavigation('home')} className="hover:text-pink-400 transition-colors text-left">Home</button></li>
               <li><Link to="/products" className="hover:text-pink-400 transition-colors">Products</Link></li>
-              <li><a href="#about" className="hover:text-pink-400 transition-colors">About</a></li>
-              <li><a href="#contact" className="hover:text-pink-400 transition-colors">Contact</a></li>
+              <li><button onClick={() => handleSectionNavigation('about')} className="hover:text-pink-400 transition-colors text-left">About</button></li>
+              <li><button onClick={() => handleSectionNavigation('contact')} className="hover:text-pink-400 transition-colors text-left">Contact</button></li>
             </ul>
           </div>
           <div>

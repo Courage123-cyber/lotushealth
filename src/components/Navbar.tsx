@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { Heart, Menu, X } from 'lucide-react';
 import lotusLogo from '../assets/images/Lotus.png';
 import { useWishlist } from '../hooks/useWishlist';
@@ -11,6 +11,28 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { getWishlistCount } = useWishlist();
   const wishlistCount = getWishlistCount();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSectionNavigation = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      // If not on home page, navigate to home first
+      navigate('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <nav className="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50" role="navigation" aria-label="Main navigation">
@@ -57,8 +79,8 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-              <a href="#about" className={baseLink}>About</a>
-              <a href="#contact" className={baseLink}>Contact</a>
+              <button onClick={() => handleSectionNavigation('about')} className={baseLink}>About</button>
+              <button onClick={() => handleSectionNavigation('contact')} className={baseLink}>Contact</button>
               <div className="relative">
                 <button
                   className={`${baseLink} relative`}
@@ -99,8 +121,8 @@ const Navbar = () => {
               <Link to="/products?category=baby" className="block px-3 py-2 text-gray-700 hover:text-pink-600 transition-colors">Baby Care</Link>
               <Link to="/products?category=sanitary" className="block px-3 py-2 text-gray-700 hover:text-pink-600 transition-colors">Sanitary</Link>
             </div>
-            <a href="#about" className="block px-3 py-2 text-gray-700 hover:text-pink-600 transition-colors">About</a>
-            <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-pink-600 transition-colors">Contact</a>
+            <button onClick={() => handleSectionNavigation('about')} className="block px-3 py-2 text-gray-700 hover:text-pink-600 transition-colors text-left">About</button>
+            <button onClick={() => handleSectionNavigation('contact')} className="block px-3 py-2 text-gray-700 hover:text-pink-600 transition-colors text-left">Contact</button>
           </div>
         </div>
       )}
