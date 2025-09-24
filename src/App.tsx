@@ -1,6 +1,6 @@
  
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { products, type Product } from './data/products';
  
 import prm from './assets/images/prm.png';
@@ -18,7 +18,28 @@ import FAQ from './components/FAQ';
 import TrustIndicators from './components/TrustIndicators';
 
 const App = () => {
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSectionNavigation = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      // If not on home page, navigate to home first
+      navigate('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   const heroSlides: { image: string; title1: string; title2: string; description: string }[] = [
     {
@@ -83,10 +104,16 @@ const App = () => {
                 {currentSlide.description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold hover:from-pink-700 hover:to-purple-700 transform hover:scale-105 hover:shadow-2xl transition-all duration-300 shadow-xl focus:ring-4 focus:ring-pink-300 focus:outline-none text-sm md:text-base">
+                <button
+                  onClick={() => navigate('/products')}
+                  className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold hover:from-pink-700 hover:to-purple-700 transform hover:scale-105 hover:shadow-2xl transition-all duration-300 shadow-xl focus:ring-4 focus:ring-pink-300 focus:outline-none text-sm md:text-base"
+                >
                   Shop Now
                 </button>
-                <button className="border-2 border-pink-600 text-pink-600 px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold hover:bg-pink-600 hover:text-white hover:shadow-lg transition-all duration-300 focus:ring-4 focus:ring-pink-300 focus:outline-none text-sm md:text-base">
+                <button
+                  onClick={() => handleSectionNavigation('about')}
+                  className="border-2 border-pink-600 text-pink-600 px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold hover:bg-pink-600 hover:text-white hover:shadow-lg transition-all duration-300 focus:ring-4 focus:ring-pink-300 focus:outline-none text-sm md:text-base"
+                >
                   Learn More
                 </button>
               </div>
