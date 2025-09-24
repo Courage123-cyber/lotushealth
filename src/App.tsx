@@ -83,25 +83,26 @@ const App = () => {
                 {currentSlide.description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-pink-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-xl">
+                <button className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-pink-700 hover:to-purple-700 transform hover:scale-105 hover:shadow-2xl transition-all duration-300 shadow-xl focus:ring-4 focus:ring-pink-300 focus:outline-none">
                   Shop Now
                 </button>
-                <button className="border-2 border-pink-600 text-pink-600 px-8 py-4 rounded-full font-semibold hover:bg-pink-600 hover:text-white transition-all duration-300">
+                <button className="border-2 border-pink-600 text-pink-600 px-8 py-4 rounded-full font-semibold hover:bg-pink-600 hover:text-white hover:shadow-lg transition-all duration-300 focus:ring-4 focus:ring-pink-300 focus:outline-none">
                   Learn More
                 </button>
               </div>
             </div>
             <div className="relative">
               <div className="relative z-10">
-                <img 
-                  src={currentSlide.image} 
-                  alt="Featured" 
-                  className="rounded-3xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500"
+                <img
+                  key={currentSlide.image} // Force re-render for fade
+                  src={currentSlide.image}
+                  alt="Featured product showcase"
+                  className="rounded-3xl shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500 animate-fade-in"
                 />
-                
+
               </div>
-              <div className="absolute top-10 left-10 w-32 h-32 bg-pink-300/30 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-10 right-10 w-24 h-24 bg-purple-300/30 rounded-full blur-2xl"></div>
+              <div className="absolute top-10 left-10 w-32 h-32 bg-pink-300/30 rounded-full blur-3xl animate-pulse-slow"></div>
+              <div className="absolute bottom-10 right-10 w-24 h-24 bg-purple-300/30 rounded-full blur-2xl animate-pulse-slow"></div>
             </div>
           </div>
         </div>
@@ -117,7 +118,7 @@ const App = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {products.slice(0, 3).map((item: Product) => (
               <div key={item.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <img src={item.image} alt={item.name} className="w-full h-56 object-contain bg-white" />
+                <img src={item.image} alt={item.name} className="w-full h-56 object-contain bg-white" loading="lazy" />
                 <div className="p-5">
                   <h3 className="font-semibold text-lg text-gray-800 mb-1">{item.name}</h3>
                   <p className="text-sm text-gray-600 line-clamp-2">{item.description}</p>
@@ -126,7 +127,7 @@ const App = () => {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link to="/products" className="inline-block bg-gradient-to-r from-pink-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium hover:from-pink-700 hover:to-purple-700 transition-colors">Browse Full Catalog</Link>
+            <Link to="/products" className="inline-block bg-gradient-to-r from-pink-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium hover:from-pink-700 hover:to-purple-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300 focus:ring-4 focus:ring-pink-300 focus:outline-none">Browse Full Catalog</Link>
           </div>
         </div>
       </section>

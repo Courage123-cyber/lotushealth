@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Star, X, ThumbsUp } from 'lucide-react';
-import type { Product, Review } from '../data/products';
+import type { Product } from '../data/products';
 
 interface ProductReviewsProps {
   product: Product;

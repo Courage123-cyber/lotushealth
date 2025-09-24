@@ -1,14 +1,12 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { products, type Product } from '../data/products';
-import { Link } from 'react-router-dom';
-import { Heart, Star, GitCompare, ShoppingCart } from 'lucide-react';
+import { Heart, Star, GitCompare } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductFilters from '../components/ProductFilters';
 import ProductComparison from '../components/ProductComparison';
 import ProductReviews from '../components/ProductReviews';
 import { useWishlist } from '../hooks/useWishlist';
-import cute from '../assets/images/cute.jpg';
 
 const ProductCard = ({
   product,
@@ -35,6 +33,7 @@ const ProductCard = ({
         src={product.image}
         alt={product.name}
         className="w-full h-64 object-contain transition-transform duration-500"
+        loading="lazy"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -108,7 +107,7 @@ const ProductCard = ({
       {/* View Reviews Button */}
       <button
         onClick={() => onViewReviews(product)}
-        className="mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+        className="mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-300 hover:shadow-md focus:ring-2 focus:ring-pink-300 focus:outline-none"
       >
         View Reviews ({product.reviews})
       </button>
@@ -117,9 +116,7 @@ const ProductCard = ({
 );
 
 const ProductsPage = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
-  const [searchQuery, setSearchQuery] = useState('');
   const [comparisonProducts, setComparisonProducts] = useState<Product[]>([]);
   const [showComparison, setShowComparison] = useState(false);
   const [selectedProductForReviews, setSelectedProductForReviews] = useState<Product | null>(null);
@@ -128,8 +125,7 @@ const ProductsPage = () => {
   const {
     addToWishlist,
     removeFromWishlist,
-    isInWishlist,
-    getWishlistCount
+    isInWishlist
   } = useWishlist();
 
   const addToComparison = (product: Product) => {
@@ -161,7 +157,7 @@ const ProductsPage = () => {
           <ProductFilters
             products={products}
             onFilteredProducts={setFilteredProducts}
-            onSearchQuery={setSearchQuery}
+            onSearchQuery={() => {}}
           />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -190,7 +186,7 @@ const ProductsPage = () => {
         <div className="fixed bottom-6 right-6 z-40">
           <button
             onClick={() => setShowComparison(true)}
-            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-full shadow-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 flex items-center gap-2"
+            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-3 rounded-full shadow-lg hover:from-pink-600 hover:to-purple-700 hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center gap-2 focus:ring-4 focus:ring-pink-300 focus:outline-none"
           >
             <GitCompare className="w-5 h-5" />
             Compare ({comparisonProducts.length})

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { Heart, Menu, X } from 'lucide-react';
 import lotusLogo from '../assets/images/Lotus.png';
 import { useWishlist } from '../hooks/useWishlist';
 
@@ -79,7 +79,13 @@ const Navbar = () => {
           </div>
 
           <div className="md:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-700 hover:text-pink-600 transition-colors">Menu</button>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-700 hover:text-pink-600 transition-colors p-2"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </div>
       </div>

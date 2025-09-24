@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { X, Plus, Check } from 'lucide-react';
 import type { Product } from '../data/products';
 
@@ -72,7 +71,7 @@ const ProductComparison = ({ isOpen, onClose, selectedProducts, onRemoveProduct 
             <thead>
               <tr className="border-b border-gray-200">
                 <th className="text-left p-4 font-medium text-gray-700 w-48">Features</th>
-                {selectedProducts.map((product, index) => (
+                {selectedProducts.map((product) => (
                   <th key={product.id} className="p-4 text-center min-w-64">
                     <div className="relative">
                       <button

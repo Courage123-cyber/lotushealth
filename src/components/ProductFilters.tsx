@@ -19,8 +19,6 @@ const ProductFilters = ({ products, onFilteredProducts, onSearchQuery }: Product
 
   // Get unique values for filters
   const categories = ['all', ...Array.from(new Set(products.map(p => p.category)))];
-  const brands = Array.from(new Set(products.map(p => p.brand).filter(Boolean)));
-  const materials = Array.from(new Set(products.map(p => p.material).filter(Boolean)));
 
   useEffect(() => {
     let filtered = [...products];
